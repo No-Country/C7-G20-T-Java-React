@@ -22,5 +22,6 @@ module.exports = {
 	plugins: ['react'],
 	rules: {
 		'react/display-name': 'off',
+		'no-unused-vars': 'warn',
 	},
 };
