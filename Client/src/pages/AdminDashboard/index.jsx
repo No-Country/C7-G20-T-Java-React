@@ -1,1 +1,1 @@
-//Aquí va la estructura gerenal de dicha vista
+export * from './AdminDashboard';
