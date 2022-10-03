@@ -1,8 +1,15 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 const App = () => {
 	return (
-		<div>
-			<h1>App</h1>
-		</div>
+		<BrowserRouter>
+			<Routes>
+				{/* 
+				--- Aquí van las rutas de nuestra App, como por ejemplo:
+				<Route path='/' element={<Login/>} /> 
+				*/}
+			</Routes>
+		</BrowserRouter>
 	);
 };
 
