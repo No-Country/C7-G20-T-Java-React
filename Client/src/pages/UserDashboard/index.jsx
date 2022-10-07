@@ -1,1 +1,5 @@
-//Aquí va la estructura gerenal de dicha vista
+export const UserDashboard = () => {
+  return (
+    <div>UserDashboard</div>
+  )
+}

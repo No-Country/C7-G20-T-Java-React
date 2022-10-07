@@ -1,16 +1,13 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React from 'react';
+import { Routes } from 'Routes';
+import ThemeProvider from 'Theme/ThemeProvider';
 
-const App = () => {
-	return (
-		<BrowserRouter>
-			<Routes>
-				{/* 
-				--- Aquí van las rutas de nuestra App, como por ejemplo:
-				<Route path='/' element={<Login/>} /> 
-				*/}
-			</Routes>
-		</BrowserRouter>
-	);
-};
+const App = () => (
+	<React.StrictMode>
+		<ThemeProvider>
+			<Routes/>
+		</ThemeProvider>
+	</React.StrictMode>
+);
 
 export default App;
