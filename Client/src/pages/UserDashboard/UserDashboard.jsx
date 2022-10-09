@@ -5,7 +5,6 @@ import ResultList from './components/ResultList';
 const UserDashboard = () => {
 	return (
 		<>
-			<h1>User dashboard</h1>
 			<ResultList />
 		</>
 	);

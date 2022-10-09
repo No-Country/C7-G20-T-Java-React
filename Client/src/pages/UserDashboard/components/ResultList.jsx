@@ -58,7 +58,7 @@ const createData = (date, typeExam, state, action) => {
 	};
 };
 
-const columns = ['Fecha', 'Examén', 'Estado', 'Acción'];
+const columns = ['Fecha', 'Examen', 'Estado', 'Acción'];
 
 const Item = styled(Paper)(({ theme }) => ({
 	backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
