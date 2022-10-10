@@ -63,7 +63,7 @@ const columns = ['Fecha', 'Examen', 'Estado', 'Acción'];
 const Item = styled(Paper)(({ theme }) => ({
 	backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
 	...theme.typography.body2,
-	padding: theme.spacing(2),
+	padding: theme.spacing(1),
 	textAlign: 'center',
 	color: theme.palette.text.secondary,
 	display: 'grid',
@@ -104,20 +104,53 @@ const rows = [
 		false,
 		<Buttons title={{ first: 'Ver', second: 'Descargar' }} quantity={2} />
 	),
+	createData(
+		`${new Date().getDate()}/${new Date().getDay()}/${new Date().getFullYear()}`,
+		'Radiología',
+		false,
+		<Buttons title={{ first: 'Ver', second: 'Descargar' }} quantity={2} />
+	),
+	createData(
+		`${new Date().getDate()}/${new Date().getDay()}/${new Date().getFullYear()}`,
+		'Radiología',
+		false,
+		<Buttons title={{ first: 'Ver', second: 'Descargar' }} quantity={2} />
+	),
+	createData(
+		`${new Date().getDate()}/${new Date().getDay()}/${new Date().getFullYear()}`,
+		'Radiología',
+		false,
+		<Buttons title={{ first: 'Ver', second: 'Descargar' }} quantity={2} />
+	),
 ];
 
 const ResultList = () => {
 	return (
-		<Box sx={{ width: '100%' }}>
-			<Grid container spacing={1.5}>
-				<Grid item xs={12}>
-					<Header>
-						{columns.map((title) => (
-							<Grid key={title}>{title}</Grid>
-						))}
-					</Header>
-				</Grid>
-
+		<Box
+			sx={{
+				height: '330px',
+				overflowY: 'scroll',
+				width: '100%',
+				position: 'relative',
+			}}
+		>
+			<Grid
+				item
+				xs={12}
+				sx={{
+					position: 'sticky',
+					top: '0',
+					zIndex: '100',
+					marginBottom: '10px',
+				}}
+			>
+				<Header>
+					{columns.map((title) => (
+						<Grid key={title}>{title}</Grid>
+					))}
+				</Header>
+			</Grid>
+			<Grid container spacing={1}>
 				{rows.map((row, index) => (
 					<Grid item xs={12} key={index}>
 						<Item>
@@ -130,30 +163,6 @@ const ResultList = () => {
 				))}
 			</Grid>
 		</Box>
-		// <TableContainer component={Paper}>
-		// 	<Table>
-		// 		<TableHead>
-		// 			<TableRow>
-		// 				<TableCell>Fecha</TableCell>
-		// 				<TableCell>Examen</TableCell>
-		// 				<TableCell>Estado</TableCell>
-		// 				<TableCell>Acción</TableCell>
-		// 			</TableRow>
-		// 		</TableHead>
-		// 		<TableBody>
-		// 			{rows.map((row, index) => (
-		// 				<TableRow key={index}>
-		// 					<TableCell>{row.date}</TableCell>
-		// 					<TableCell>{row.typeExam}</TableCell>
-		// 					<TableCell>
-		// 						{row.state ? 'Disponible' : 'No disponible'}
-		// 					</TableCell>
-		// 					<TableCell>{row.action}</TableCell>
-		// 				</TableRow>
-		// 			))}
-		// 		</TableBody>
-		// 	</Table>
-		// </TableContainer>
 	);
 };
 
