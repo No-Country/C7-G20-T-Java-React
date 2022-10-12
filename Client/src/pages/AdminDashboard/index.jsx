@@ -1,6 +1,6 @@
 import UsersList from './components/UsersList';
 
-export const AdminDashboard = () => {
+const AdminDashboard = () => {
 	return (
 		<div>
 			<h1>AdminDashboard</h1>
@@ -8,3 +8,5 @@ export const AdminDashboard = () => {
 		</div>
 	);
 };
+
+export default AdminDashboard;
