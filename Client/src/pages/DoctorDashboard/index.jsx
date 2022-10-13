@@ -1,7 +1,7 @@
-import { Button } from "@mui/material"
+import { Button } from '@mui/material';
 
-export const DoctorDashboard = () => {
-  return (
-    <Button variant="containedPrimary">DoctorDashboard</Button>
-  )
-}
+const DoctorDashboard = () => {
+	return <Button variant='containedPrimary'>DoctorDashboard</Button>;
+};
+
+export default DoctorDashboard;
