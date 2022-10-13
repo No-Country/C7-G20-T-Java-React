@@ -10,10 +10,8 @@ import {
 	Tooltip,
 	MenuItem,
 } from '@mui/material';
-import AdbIcon from '@mui/icons-material/Adb';
 import { useState } from 'react';
-
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+import LogoHeader from '../assets/logoHeader';
 
 const Header = () => {
 	const [anchorElUser, setAnchorElUser] = useState(null);
@@ -26,10 +24,21 @@ const Header = () => {
 		setAnchorElUser(null);
 	};
 
+	const handleNavigate = () => {
+		setAnchorElUser(null);
+	};
+
+	const handleLogout = () => {
+		setAnchorElUser(null);
+	};
+
 	return (
 		<AppBar position='static'>
 			<Container maxWidth='xl'>
 				<Toolbar disableGutters>
+					<Box sx={{ flexGrow: 1, display: { xs: 'flex' } }}>
+						<LogoHeader />
+					</Box>
 					<Box sx={{ flexGrow: 0 }}>
 						<Tooltip title='Open settings'>
 							<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -52,11 +61,16 @@ const Header = () => {
 							open={Boolean(anchorElUser)}
 							onClose={handleCloseUserMenu}
 						>
-							{settings.map((setting) => (
-								<MenuItem key={setting} onClick={handleCloseUserMenu}>
-									<Typography textAlign='center'>{setting}</Typography>
-								</MenuItem>
-							))}
+							<MenuItem onClick={handleNavigate}>
+								<Typography textAlign='center' variant='subtitle1'>
+									Dashboard
+								</Typography>
+							</MenuItem>
+							<MenuItem onClick={handleLogout}>
+								<Typography textAlign='center' variant='subtitle1'>
+									Logout
+								</Typography>
+							</MenuItem>
 						</Menu>
 					</Box>
 				</Toolbar>
