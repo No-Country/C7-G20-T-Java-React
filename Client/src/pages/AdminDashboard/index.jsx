@@ -1,11 +1,12 @@
 import UsersList from './components/UsersList';
+import Layout from '../../components/Layout';
 
 const AdminDashboard = () => {
 	return (
-		<div>
+		<Layout>
 			<h1>AdminDashboard</h1>
 			<UsersList />
-		</div>
+		</Layout>
 	);
 };
 
