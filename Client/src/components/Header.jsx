@@ -63,12 +63,12 @@ const Header = () => {
 						>
 							<MenuItem onClick={handleNavigate}>
 								<Typography textAlign='center' variant='subtitle1'>
-									Dashboard
+									Configuraciones
 								</Typography>
 							</MenuItem>
 							<MenuItem onClick={handleLogout}>
 								<Typography textAlign='center' variant='subtitle1'>
-									Logout
+									Salir
 								</Typography>
 							</MenuItem>
 						</Menu>
