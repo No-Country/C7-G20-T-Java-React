@@ -1,11 +1,14 @@
-import { Button, Container, Grid, Typography } from '@mui/material';
+import { Box, Button, Container, Grid, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import { THEME } from '../../theme/theme';
 import Logo from '../../assets/logo';
-import Label from './components/Label';
+import { Label } from '../../components';
 import { useState } from 'react';
 
 const Login = () => {
 	const [values, setValues] = useState({ email: '', password: '' });
+
+	const navigate = useNavigate();
 
 	const handleChange = (e) => {
 		setValues({ ...values, [e.target.name]: e.target.value });
@@ -14,6 +17,11 @@ const Login = () => {
 	const handleSubmit = () => {
 		console.log(values);
 	};
+
+	const handleGoToRegister = () => {
+		navigate('/Register', { replace: true });
+	};
+
 	return (
 		<Container
 			sx={{
@@ -100,14 +108,26 @@ const Login = () => {
 							¿Olvidaste la contraseña?
 						</Typography>
 
-						<Button
-							type='submit'
-							variant='contained'
-							color='primary'
-							sx={{ marginTop: 'auto' }}
+						<Box
+							sx={{
+								display: 'flex',
+								justifyContent: 'space-between',
+								width: '100%',
+							}}
+							mt='auto'
 						>
-							Ingresar
-						</Button>
+							<Button
+								type='button'
+								variant='contained'
+								color='secondary'
+								onClick={handleGoToRegister}
+							>
+								Registrarse
+							</Button>
+							<Button type='submit' variant='contained' color='primary'>
+								Ingresar
+							</Button>
+						</Box>
 					</form>
 				</Grid>
 				<Grid

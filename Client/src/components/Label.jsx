@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material';
-import { THEME } from '../../../theme/theme';
+import { THEME } from '../theme/theme';
 import PropTypes from 'prop-types';
 
 const Label = ({ label }) => {
