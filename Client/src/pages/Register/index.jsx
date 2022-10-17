@@ -1,4 +1,13 @@
-import { Container, Grid, Typography, Box, Button } from '@mui/material';
+import {
+	Container,
+	Grid,
+	Typography,
+	Box,
+	Button,
+	InputLabel,
+	Select,
+	MenuItem,
+} from '@mui/material';
 import { THEME } from '../../theme/theme';
 import Logo from '../../assets/logo';
 import { Label } from '../../components';
@@ -12,10 +21,13 @@ const nameValidation = /^[a-z ,.'-]+$/i;
 
 const ageValidation = /^[0-9]*$/;
 
+const roles = ['Administrado', 'Doctor', 'Paciente'];
+
 const Register = () => {
 	const {
 		register,
 		handleSubmit,
+		watch,
 		formState: { errors },
 	} = useForm();
 
@@ -28,6 +40,8 @@ const Register = () => {
 	};
 
 	const countErrors = Object.keys(errors).length;
+
+	const roleSelected = watch('role');
 
 	return (
 		<Container
@@ -177,6 +191,34 @@ const Register = () => {
 								{errors.age.type === 'pattern'
 									? 'La edad debe contener sólo números.'
 									: errors.age.message}
+							</p>
+						)}
+
+						<InputLabel id='demo-simple-select-helper-label'>Rol</InputLabel>
+						<Select
+							labelId='demo-simple-select-helper-label'
+							id='demo-simple-select-helper'
+							label='Rol'
+						>
+							<MenuItem value=''>
+								<em>None</em>
+							</MenuItem>
+							{roles.map((rol, index) => (
+								<MenuItem key={index} value={rol}>
+									{rol}
+								</MenuItem>
+							))}
+						</Select>
+						{errors.role && (
+							<p
+								role='alert'
+								style={{
+									color: THEME.palette.error.main,
+									margin: 0,
+									...THEME.typography.subtitle2,
+								}}
+							>
+								{errors.role.message}
 							</p>
 						)}
 
