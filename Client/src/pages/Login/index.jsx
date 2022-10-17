@@ -2,18 +2,31 @@ import { Button, Container, Grid, Typography } from '@mui/material';
 import { THEME } from '../../theme/theme';
 import Logo from '../../assets/logo';
 import Label from './components/Label';
-import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+
+const emailValidation =
+	/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 const Login = () => {
-	const [values, setValues] = useState({ email: '', password: '' });
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm();
 
-	const handleChange = (e) => {
-		setValues({ ...values, [e.target.name]: e.target.value });
+	const onSubmit = (data) => console.log(data);
+
+	const navigate = useNavigate();
+
+	const handleGoToLogin = () => {
+		navigate('/', { replace: true });
 	};
 
-	const handleSubmit = () => {
-		console.log(values);
-	};
+	console.log(errors);
+
+	const countErrors = Object.keys(errors).length;
+
 	return (
 		<Container
 			sx={{
@@ -23,7 +36,12 @@ const Login = () => {
 				minHeight: '100vh',
 			}}
 		>
-			<Grid container height={500} justifyContent='center' alignItems='center'>
+			<Grid
+				container
+				height={countErrors ? 500 + 20 * countErrors : 500}
+				justifyContent='center'
+				alignItems='center'
+			>
 				<Grid
 					item
 					height='100%'
@@ -39,7 +57,7 @@ const Login = () => {
 					}}
 				>
 					<form
-						onSubmit={handleSubmit}
+						onSubmit={handleSubmit(onSubmit)}
 						style={{
 							display: 'flex',
 							flexDirection: 'column',
@@ -62,24 +80,45 @@ const Login = () => {
 							type='text'
 							name='email'
 							placeholder='tuemail@aqui.com'
-							autoComplete='off'
-							onChange={handleChange}
+							{...register('email', {
+								pattern: emailValidation,
+								required: 'Te faltó completar este campo.',
+							})}
+							aria-invalid={errors.email ? 'true' : 'false'}
 							style={{
 								height: '30px',
 								borderRadius: '8px',
 								borderWidth: 0.5,
 								borderColor: 'rgba(0, 0, 0, 0.3)',
-								padding: '5px',
+								padding: '10px',
 								fontSize: '1rem',
 							}}
 						/>
+						{errors.email && (
+							<p
+								role='alert'
+								style={{
+									color: THEME.palette.error.main,
+									margin: 0,
+									...THEME.typography.subtitle2,
+								}}
+							>
+								{errors.email.type === 'pattern'
+									? 'El email ingresado es inválido.'
+									: errors.email.message}
+							</p>
+						)}
 
 						<Label label='Contraseña' />
 						<input
 							type='password'
 							autoComplete='off'
 							name='password'
-							onChange={handleChange}
+							{...register('password', {
+								minLength: 8,
+								required: 'Te faltó completar este campo.',
+							})}
+							aria-invalid={errors.password ? 'true' : 'false'}
 							style={{
 								height: '30px',
 								borderRadius: '8px',
@@ -89,6 +128,20 @@ const Login = () => {
 								fontSize: '1rem',
 							}}
 						/>
+						{errors.password && (
+							<p
+								role='alert'
+								style={{
+									color: THEME.palette.error.main,
+									margin: 0,
+									...THEME.typography.subtitle2,
+								}}
+							>
+								{errors.password.type === 'minLength'
+									? 'La contraseña debe contener al menos 8 caracteres.'
+									: errors.password.message}
+							</p>
+						)}
 
 						<Typography
 							sx={{
