@@ -27,8 +27,6 @@ const Register = () => {
 		navigate('/', { replace: true });
 	};
 
-	console.log(errors);
-
 	const countErrors = Object.keys(errors).length;
 
 	return (
@@ -77,7 +75,7 @@ const Register = () => {
 								marginBottom: 2,
 							}}
 						>
-							Ingresar
+							Registro
 						</Typography>
 
 						<Label label='Nombre' />
