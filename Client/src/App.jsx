@@ -5,7 +5,7 @@ import ThemeProvider from 'Theme/ThemeProvider';
 const App = () => (
 	<React.StrictMode>
 		<ThemeProvider>
-			<Routes/>
+			<Routes />
 		</ThemeProvider>
 	</React.StrictMode>
 );
