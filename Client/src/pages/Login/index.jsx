@@ -19,8 +19,6 @@ const Login = () => {
 
 	const navigate = useNavigate();
 
-	console.log(errors);
-
 	const countErrors = Object.keys(errors).length;
 	const handleGoToRegister = () => {
 		navigate('/Register', { replace: true });
@@ -162,7 +160,7 @@ const Login = () => {
 						>
 							<Button
 								type='button'
-								variant='contained'
+								variant='outlined'
 								color='secondary'
 								onClick={handleGoToRegister}
 							>
