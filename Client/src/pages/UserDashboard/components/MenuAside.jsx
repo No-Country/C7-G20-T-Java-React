@@ -8,7 +8,7 @@ const MenuAside = ({ data, title }) => {
 	const asideApp = {
 		backgroundColor: '#fff',
 		height: '100%',
-		padding: '15px',
+		padding: '30px 15px',
 		display: 'grid',
 		gridTemplateRows: 'repeat(2,0fr)',
 		gap: '30px',
