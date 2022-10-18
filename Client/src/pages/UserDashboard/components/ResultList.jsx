@@ -1,5 +1,5 @@
 import { Paper, Grid, Box, styled, Button, Stack } from '@mui/material';
-import { style } from '@mui/system';
+import PropsTypes from 'prop-types';
 
 const BootstrapButton = styled(Button)({
 	boxShadow: 'none',
@@ -47,6 +47,11 @@ const Buttons = ({ title, quantity }) => {
 			<BootstrapButton variant='contained'>{second}</BootstrapButton>
 		</Stack>
 	);
+};
+
+Buttons.propTypes = {
+	title: PropsTypes.object,
+	quantity: PropsTypes.number,
 };
 
 const createData = (date, typeExam, state, action) => {

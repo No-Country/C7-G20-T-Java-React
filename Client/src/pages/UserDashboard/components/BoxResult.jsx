@@ -1,5 +1,4 @@
 import { Grid, Typography } from '@mui/material';
-import { Box } from '@mui/system';
 
 const BoxResult = () => {
 	const nums = [

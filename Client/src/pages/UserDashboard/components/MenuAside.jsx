@@ -1,6 +1,7 @@
 import { Box, Card, CardContent, Grid, Typography } from '@mui/material';
 import ContactSupportRoundedIcon from '@mui/icons-material/ContactSupportRounded';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import PropsTypes from 'prop-types';
 
 const MenuAside = ({ data, title }) => {
 	const asideApp = {
@@ -65,6 +66,11 @@ const MenuAside = ({ data, title }) => {
 			</Box>
 		</aside>
 	);
+};
+
+MenuAside.propTypes = {
+	data: PropsTypes.array,
+	title: PropsTypes.string,
 };
 
 export default MenuAside;
