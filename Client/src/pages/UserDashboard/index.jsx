@@ -4,6 +4,7 @@ import ResultList from './components/ResultList';
 import MenuAside from './components/MenuAside';
 import { Box, Typography } from '@mui/material';
 import BoxResult from './components/BoxResult';
+import { Layout } from '../../components';
 
 const UserDashboard = () => {
 	const mainApp = {
@@ -12,6 +13,7 @@ const UserDashboard = () => {
 		display: 'grid',
 		gridTemplateColumns: '2fr, 1fr',
 		gap: '40px',
+		paddingBottom: '60px',
 	};
 
 	const mainViewApp = {
@@ -26,30 +28,32 @@ const UserDashboard = () => {
 	};
 
 	return (
-		<main style={mainApp}>
-			<Box style={mainViewApp}>
-				<Typography variant='h4'>
-					<b>Tu tablero</b>
-				</Typography>
-				<article>
-					<BoxResult />
-				</article>
-				<article>
-					<ResultList />
-				</article>
-			</Box>
-			<section style={asideViewApp}>
-				<MenuAside
-					data={[
-						'Nombre:',
-						'Edad:',
-						'Fecha de nacimiento:',
-						'Entidad de salud:',
-					]}
-					title='Datos personales'
-				/>
-			</section>
-		</main>
+		<Layout>
+			<main style={mainApp}>
+				<Box style={mainViewApp}>
+					<Typography variant='h5' my={2}>
+						<b>Tu tablero</b>
+					</Typography>
+					<article>
+						<BoxResult />
+					</article>
+					<article>
+						<ResultList />
+					</article>
+				</Box>
+				<section style={asideViewApp}>
+					<MenuAside
+						data={[
+							'Nombre:',
+							'Edad:',
+							'Fecha de nacimiento:',
+							'Entidad de salud:',
+						]}
+						title='Datos personales'
+					/>
+				</section>
+			</main>
+		</Layout>
 	);
 };
 

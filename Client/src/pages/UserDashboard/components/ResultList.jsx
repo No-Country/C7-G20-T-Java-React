@@ -1,5 +1,14 @@
-import { Paper, Grid, Box, styled, Button, Stack } from '@mui/material';
+import {
+	Paper,
+	Grid,
+	Box,
+	styled,
+	Button,
+	Stack,
+	Typography,
+} from '@mui/material';
 import PropsTypes from 'prop-types';
+import { THEME } from '../../../theme/theme';
 
 const BootstrapButton = styled(Button)({
 	boxShadow: 'none',
@@ -67,7 +76,7 @@ const columns = ['Fecha', 'Examen', 'Estado', 'Acción'];
 
 const Item = styled(Paper)(({ theme }) => ({
 	backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-	...theme.typography.body2,
+	...theme.typography.subtitle1,
 	padding: theme.spacing(1),
 	textAlign: 'center',
 	color: theme.palette.text.secondary,
@@ -79,9 +88,8 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 const Header = styled(Paper)(({ theme }) => ({
 	backgroundColor: '#A3B18A',
-	...theme.typography.body2,
 	color: '#000',
-	padding: theme.spacing(2),
+	padding: theme.spacing(1),
 	textAlign: 'center',
 	display: 'grid',
 	gridTemplateColumns: 'repeat(4,1fr)',
@@ -137,6 +145,8 @@ const ResultList = () => {
 				overflowY: 'scroll',
 				width: '100%',
 				position: 'relative',
+				borderRadius: '8px',
+				paddingBottom: '5px',
 			}}
 		>
 			<Grid
@@ -151,7 +161,11 @@ const ResultList = () => {
 			>
 				<Header>
 					{columns.map((title) => (
-						<Grid key={title}>{title}</Grid>
+						<Grid key={title}>
+							<Typography variant='h6'>
+								<b>{title}</b>
+							</Typography>
+						</Grid>
 					))}
 				</Header>
 			</Grid>
