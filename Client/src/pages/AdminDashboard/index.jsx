@@ -7,7 +7,7 @@ import ActivityList from './components/ActivityList';
 const AdminDashboard = () => {
 	return (
 		<Layout>
-			<Box sx={{ padding: '30px' }}>
+			<Box sx={{ padding: '30px', backgroundColor: '#dad7dc' }}>
 				<Typography variant='h5' mb={2}>
 					<b>Tu tablero</b>
 				</Typography>
