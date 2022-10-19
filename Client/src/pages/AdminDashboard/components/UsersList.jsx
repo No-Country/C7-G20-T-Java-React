@@ -1,192 +1,216 @@
-import PropTypes from 'prop-types';
-import { useState } from 'react';
 import {
 	Box,
-	Table,
-	TableBody,
-	TableCell,
-	TableContainer,
-	TableHead,
-	TableRow,
+	Button,
+	Grid,
+	Paper,
+	Stack,
+	styled,
 	Typography,
 } from '@mui/material';
-import { Stack } from '@mui/system';
+import PropsTypes from 'prop-types';
 
-function createData(id, firstName, lastName, role, createAt, status) {
-	return { id, firstName, lastName, role, createAt, status };
+const BootstrapButton = styled(Button)({
+	boxShadow: 'none',
+	textTransform: 'none',
+	fontSize: 16,
+	padding: '6px 12px',
+	borderRadius: '8px',
+	lineHeight: 1.5,
+	backgroundColor: '#588157',
+	fontFamily: [
+		'-apple-system',
+		'BlinkMacSystemFont',
+		'"Segoe UI"',
+		'Roboto',
+		'"Helvetica Neue"',
+		'Arial',
+		'sans-serif',
+		'"Apple Color Emoji"',
+		'"Segoe UI Emoji"',
+		'"Segoe UI Symbol"',
+	].join(','),
+	'&:hover': {
+		backgroundColor: '#A3B18A',
+		borderColor: '#A3B18A',
+		boxShadow: 'none',
+	},
+	'&:active': {
+		boxShadow: 'none',
+		backgroundColor: '#A3B18A',
+		borderColor: '#A3B18A',
+	},
+	'&:focus': {
+		boxShadow: '0 0 0 0.2rem #A3B18A',
+	},
+});
+
+const Buttons = ({ title, quantity }) => {
+	const { first, second = null } = title;
+
+	return quantity === 1 ? (
+		<Button variant='contained'>{first}</Button>
+	) : (
+		<Stack spacing={1} direction='row'>
+			<BootstrapButton variant='contained'>{first}</BootstrapButton>
+			<BootstrapButton variant='contained'>{second}</BootstrapButton>
+		</Stack>
+	);
+};
+
+Buttons.propTypes = {
+	title: PropsTypes.object,
+	quantity: PropsTypes.number,
+};
+
+function createData(id, firstName, lastName, role, createAt, status, action) {
+	return { id, firstName, lastName, role, createAt, status, action };
 }
 
 const rows = [
-	createData(0, 'Ricardo', 'Aguirre', 'Paciente', '05/06/2021', 'Activo'),
-	createData(1, 'Laura', 'Suarez', 'Paciente', '21/06/2021', 'Activo'),
-	createData(2, 'Eduardo', 'Torres', 'Doctor', '03/01/2021', 'Activo'),
-	createData(3, 'Julia', 'Díaz', 'Paciente', '15/09/2021', 'Activo'),
-	createData(4, 'Sara', 'Hernández', 'Doctor', '05/06/2021', 'Activo'),
-	createData(5, 'Juan', 'Pérez', 'Paciente', '18/11/2021', 'Activo'),
-	createData(6, 'Jimena', 'Ríos', 'Admin', '07/01/2021', 'Activo'),
+	createData(
+		0,
+		'Ricardo',
+		'Aguirre',
+		'Paciente',
+		'05/06/2021',
+		'Activo',
+		<Buttons title={{ first: 'Editar', second: 'Eliminar' }} quantity={2} />
+	),
+	createData(
+		1,
+		'Laura',
+		'Suarez',
+		'Paciente',
+		'21/06/2021',
+		'Activo',
+		<Buttons title={{ first: 'Editar', second: 'Eliminar' }} quantity={2} />
+	),
+	createData(
+		2,
+		'Eduardo',
+		'Torres',
+		'Doctor',
+		'03/01/2021',
+		'Activo',
+		<Buttons title={{ first: 'Editar', second: 'Eliminar' }} quantity={2} />
+	),
+	createData(
+		3,
+		'Julia',
+		'Díaz',
+		'Paciente',
+		'15/09/2021',
+		'Activo',
+		<Buttons title={{ first: 'Editar', second: 'Eliminar' }} quantity={2} />
+	),
+	createData(
+		4,
+		'Sara',
+		'Hernández',
+		'Doctor',
+		'05/06/2021',
+		'Activo',
+		<Buttons title={{ first: 'Editar', second: 'Eliminar' }} quantity={2} />
+	),
+	createData(
+		5,
+		'Juan',
+		'Pérez',
+		'Paciente',
+		'18/11/2021',
+		'Activo',
+		<Buttons title={{ first: 'Editar', second: 'Eliminar' }} quantity={2} />
+	),
+	createData(
+		6,
+		'Jimena',
+		'Ríos',
+		'Admin',
+		'07/01/2021',
+		'Activo',
+		<Buttons title={{ first: 'Editar', second: 'Eliminar' }} quantity={2} />
+	),
 ];
 
-function descendingComparator(a, b, orderBy) {
-	if (b[orderBy] < a[orderBy]) {
-		return -1;
-	}
-	if (b[orderBy] > a[orderBy]) {
-		return 1;
-	}
-	return 0;
-}
+const columns = ['ID', 'Nombre', 'Rol', 'Fecha de Alta', 'Estado', 'Acción'];
 
-function getComparator(order, orderBy) {
-	return order === 'desc'
-		? (a, b) => descendingComparator(a, b, orderBy)
-		: (a, b) => -descendingComparator(a, b, orderBy);
-}
+const Item = styled(Paper)(({ theme }) => ({
+	backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+	...theme.typography.subtitle1,
+	padding: theme.spacing(1),
+	textAlign: 'center',
+	color: theme.palette.text.secondary,
+	display: 'grid',
+	gridTemplateColumns: 'repeat(6,1fr)',
+	justifyContent: 'space-between',
+	alignItems: 'center',
+	borderRadius: '8px',
+}));
 
-function stableSort(array, comparator) {
-	const stabilizedThis = array.map((el, index) => [el, index]);
-	stabilizedThis.sort((a, b) => {
-		const order = comparator(a[0], b[0]);
-		if (order !== 0) {
-			return order;
-		}
-		return a[1] - b[1];
-	});
-	return stabilizedThis.map((el) => el[0]);
-}
-
-const headCells = [
-	{
-		id: 'id',
-		align: 'left',
-		disablePadding: false,
-		label: 'ID',
-	},
-	{
-		id: 'fullname',
-		align: 'left',
-		disablePadding: true,
-		label: 'Nombre Completo',
-	},
-	{
-		id: 'role',
-		align: 'right',
-		disablePadding: false,
-		label: 'Rol',
-	},
-	{
-		id: 'created_at',
-		align: 'left',
-		disablePadding: false,
-		label: 'Fecha de Creación',
-	},
-	{
-		id: 'status',
-		align: 'right',
-		disablePadding: false,
-		label: 'Estado',
-	},
-];
-
-function OrderTableHead({ order, orderBy }) {
-	return (
-		<TableHead>
-			<TableRow>
-				{headCells.map((headCell) => (
-					<TableCell
-						key={headCell.id}
-						align={headCell.align}
-						padding={headCell.disablePadding ? 'none' : 'normal'}
-						sortDirection={orderBy === headCell.id ? order : false}
-					>
-						{headCell.label}
-					</TableCell>
-				))}
-			</TableRow>
-		</TableHead>
-	);
-}
-
-OrderTableHead.propTypes = {
-	order: PropTypes.string,
-	orderBy: PropTypes.string,
-};
+const Header = styled(Paper)(({ theme }) => ({
+	backgroundColor: '#A3B18A',
+	color: '#000',
+	padding: theme.spacing(1),
+	textAlign: 'center',
+	display: 'grid',
+	gridTemplateColumns: 'repeat(6,1fr)',
+	justifyContent: 'space-between',
+	fontWeight: '600',
+	borderRadius: '8px',
+}));
 
 const UsersList = () => {
-	const [order] = useState('asc');
-	const [orderBy] = useState('id');
-	const [selected] = useState([]);
-
-	const isSelected = (trackingNo) => selected.indexOf(trackingNo) !== -1;
-
 	return (
-		<Box>
-			<TableContainer
+		<>
+			<Typography variant='h6' mb={1}>
+				Lista de usuarios
+			</Typography>
+			<Box
 				sx={{
+					height: '330px',
+					overflowY: 'scroll',
 					width: '100%',
-					overflowX: 'auto',
 					position: 'relative',
-					display: 'block',
-					maxWidth: '100%',
-					'& td, & th': { whiteSpace: 'nowrap' },
+					borderRadius: '8px',
+					paddingBottom: '5px',
 				}}
 			>
-				<Table
-					aria-labelledby='tableTitle'
+				<Grid
+					item
+					xs={12}
 					sx={{
-						'& .MuiTableCell-root:first-of-type': {
-							pl: 2,
-						},
-						'& .MuiTableCell-root:last-child': {
-							pr: 3,
-						},
+						position: 'sticky',
+						top: '0',
+						zIndex: '100',
+						marginBottom: '10px',
 					}}
 				>
-					<TableBody>
-						{stableSort(rows, getComparator(order, orderBy)).map(
-							(row, index) => {
-								const isItemSelected = isSelected(row.id);
-								const labelId = `enhanced-table-checkbox-${index}`;
-
-								return (
-									<TableRow
-										hover
-										role='checkbox'
-										sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-										aria-checked={isItemSelected}
-										tabIndex={-1}
-										key={row.id}
-										selected={isItemSelected}
-									>
-										<TableCell
-											component='th'
-											id={labelId}
-											scope='row'
-											align='left'
-										>
-											<Typography color='secondary'>{row.id}</Typography>
-										</TableCell>
-										<TableCell align='left'>
-											{row.firstName} {row.lastName}
-										</TableCell>
-										<TableCell align='right'>{row.role}</TableCell>
-										<TableCell align='left'>
-											<Stack direction='row' spacing={1} alignItems='center'>
-												<Typography>{row.createAt}</Typography>
-											</Stack>
-										</TableCell>
-										<TableCell align='right'>
-											<Stack direction='row' spacing={1} alignItems='center'>
-												<Typography>{row.status}</Typography>
-											</Stack>
-										</TableCell>
-									</TableRow>
-								);
-							}
-						)}
-					</TableBody>
-				</Table>
-			</TableContainer>
-		</Box>
+					<Header>
+						{columns.map((title) => (
+							<Grid key={title}>
+								<Typography variant='h6'>
+									<b>{title}</b>
+								</Typography>
+							</Grid>
+						))}
+					</Header>
+				</Grid>
+				<Grid container spacing={1}>
+					{rows.map((row, index) => (
+						<Grid item xs={12} key={index}>
+							<Item>
+								<Grid>{row.id}</Grid>
+								<Grid>{`${row.firstName} ${row.lastName}`}</Grid>
+								<Grid>{row.role}</Grid>
+								<Grid>{row.createAt}</Grid>
+								<Grid>{row.status}</Grid>
+								<Grid>{row.action}</Grid>
+							</Item>
+						</Grid>
+					))}
+				</Grid>
+			</Box>
+		</>
 	);
 };
 
