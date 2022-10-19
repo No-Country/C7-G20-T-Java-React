@@ -8,7 +8,6 @@ import {
 	Typography,
 } from '@mui/material';
 import PropsTypes from 'prop-types';
-import { THEME } from '../../../theme/theme';
 
 const BootstrapButton = styled(Button)({
 	boxShadow: 'none',
