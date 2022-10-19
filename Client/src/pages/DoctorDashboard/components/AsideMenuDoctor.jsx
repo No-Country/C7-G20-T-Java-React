@@ -4,13 +4,47 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import PropsTypes from 'prop-types';
 import { THEME } from '../../../theme/theme';
 
-const MenuAside = ({ data, title }) => {
+const Tags = ({ item }) => {
+	return (
+		<Box
+			sx={{
+				border: `1px solid ${THEME.palette.primary.main}`,
+				backgroundColor: THEME.palette.secondary.main,
+				borderRadius: '6px',
+				padding: '5px 10px',
+				marginY: '5px',
+				width: 'fit-content',
+				...THEME.typography.subtitle1,
+				color: 'white',
+				boxShadow: '1px 2px 5px rgba(0, 0, 0, 0.5)',
+				textShadow: '0.5px 0.5px 1px rgba(0, 0, 0, 0.5)',
+			}}
+		>
+			{item}
+		</Box>
+	);
+};
+
+Tags.propTypes = {
+	item: PropsTypes.string,
+};
+
+const AvailableExams = [
+	'Radiografía de tórax',
+	'TAC cerebral',
+	'Muestra de sangre',
+	'Espirométria',
+	'Resonancia magnética',
+	'Doppler',
+];
+
+const AsideMenuDoctor = ({ data, title }) => {
 	const asideApp = {
 		backgroundColor: '#fff',
 		height: '100%',
 		padding: '30px 15px',
 		display: 'grid',
-		gridTemplateRows: 'repeat(2,0fr)',
+		gridTemplateRows: 'repeat(3fr)',
 		gap: '30px',
 	};
 
@@ -40,9 +74,10 @@ const MenuAside = ({ data, title }) => {
 						>
 							<b>{title}</b>
 						</Typography>
-						{data.map((item) => (
-							<Typography key={item} variant='subtitle1'>
-								<b>{item}</b>
+						{data.map((item, index) => (
+							<Typography key={index} variant='subtitle1'>
+								<b>{item.label}</b>&nbsp;
+								{item.value}
 							</Typography>
 						))}
 					</CardContent>
@@ -74,13 +109,31 @@ const MenuAside = ({ data, title }) => {
 					</CardContent>
 				</Card>
 			</Box>
+			<Box>
+				<Card sx={{ border: '1px solid #344E41', cursor: 'pointer' }}>
+					<CardContent>
+						<Typography
+							variant='h6'
+							color={THEME.palette.primary.main}
+							sx={{ marginBottom: '10px' }}
+						>
+							<b>Exámenes disponibles</b>
+						</Typography>
+						<Grid display='flex' flexDirection='column'>
+							{AvailableExams.map((exam, index) => (
+								<Tags item={exam} key={index} />
+							))}
+						</Grid>
+					</CardContent>
+				</Card>
+			</Box>
 		</aside>
 	);
 };
 
-MenuAside.propTypes = {
+AsideMenuDoctor.propTypes = {
 	data: PropsTypes.array,
 	title: PropsTypes.string,
 };
 
-export default MenuAside;
+export default AsideMenuDoctor;
