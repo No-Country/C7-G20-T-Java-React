@@ -15,10 +15,10 @@ const SelectInput = forwardRef(
 				onBlur={onBlur}
 				defaultValue=''
 				fullWidth
-				sx={{ height: '45px', ...THEME.typography.subtitle1 }}
+				sx={{ height: '50px', ...THEME.typography.subtitle1 }}
 			>
 				{options.map((option, index) => (
-					<MenuItem value={index} key={index} sx={{ fontSize: '16px' }}>
+					<MenuItem value={index + 1} key={index} sx={{ fontSize: '16px' }}>
 						{option}
 					</MenuItem>
 				))}

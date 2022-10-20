@@ -21,7 +21,20 @@ const Register = () => {
 		formState: { errors },
 	} = useForm();
 
-	const onSubmit = (data) => console.log({ data });
+	const onSubmit = (data) => {
+		fetch('https://analisis-clinico.herokuapp.com/v1/user/addUser', {
+			method: 'POST',
+			credentials: 'same-origin',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(data),
+		})
+			.then((res) => res.json())
+			.then((data) => console.log(data))
+			.catch((e) => console.error(e));
+	};
 
 	const navigate = useNavigate();
 
@@ -118,7 +131,7 @@ const Register = () => {
 						<input
 							type='text'
 							name='lastName'
-							placeholder='Carlos'
+							placeholder='Suárez'
 							{...register('lastName', {
 								pattern: nameValidation,
 								required: 'Te faltó completar este campo.',
@@ -152,7 +165,6 @@ const Register = () => {
 						<input
 							type='text'
 							name='age'
-							placeholder='28'
 							{...register('age', {
 								pattern: ageValidation,
 								required: 'Te faltó completar este campo.',
@@ -206,7 +218,7 @@ const Register = () => {
 						<input
 							type='text'
 							name='email'
-							placeholder='tuemail@aqui.com'
+							placeholder='robertosuarez@gmail.com'
 							{...register('email', {
 								pattern: emailValidation,
 								required: 'Te faltó completar este campo.',
@@ -239,7 +251,6 @@ const Register = () => {
 						<Label label='Contraseña' />
 						<input
 							type='password'
-							autoComplete='off'
 							name='password'
 							{...register('password', {
 								minLength: 8,
@@ -251,7 +262,7 @@ const Register = () => {
 								borderRadius: '8px',
 								borderWidth: 0.5,
 								borderColor: 'rgba(0, 0, 0, 0.3)',
-								padding: '5px',
+								padding: '10px',
 								fontSize: '1rem',
 							}}
 						/>
