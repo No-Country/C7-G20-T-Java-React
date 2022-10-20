@@ -1,6 +1,7 @@
 package analisisclinicos.com.analisiclinicos.dao.repository;
 
+import analisisclinicos.com.analisiclinicos.models.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface Patient extends JpaRepository<Patient, Long> {
+public interface RoleRepository extends JpaRepository<Role, Long> {
 }

@@ -1,6 +1,7 @@
 package analisisclinicos.com.analisiclinicos.dao.repository;
 
+import analisisclinicos.com.analisiclinicos.models.Area;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface Category extends JpaRepository<Category, Long> {
+public interface AreaRepository extends JpaRepository<Area, Long> {
 }

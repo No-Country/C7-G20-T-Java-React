@@ -1,11 +1,14 @@
 package analisisclinicos.com.analisiclinicos.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "person")
@@ -24,9 +27,11 @@ public class Person implements Serializable {
     private String identificationNumber;
 
     @Column(name = "name")
+    @JsonProperty("firstName")
     private  String name;
 
-    @Column(name = "last_name")
+    @Column(name = "lastName")
+    @JsonProperty("lastName")
     private String lastName;
 
     @Column(name = "address")
@@ -34,9 +39,11 @@ public class Person implements Serializable {
 
     @Column(name = "email")
     @Email
+    @JsonProperty("email")
     private String email;
 
     @Column(name = "password")
+    @JsonProperty("password")
     private String password;
 
     @Column(name = "status")
