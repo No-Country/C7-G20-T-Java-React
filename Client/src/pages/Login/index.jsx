@@ -15,7 +15,22 @@ const Login = () => {
 		formState: { errors },
 	} = useForm();
 
-	const onSubmit = (data) => console.log(data);
+	const onSubmit = (data) => {
+		fetch('https://analisis-clinico.herokuapp.com/v1/user/login', {
+			method: 'POST',
+			credentials: 'same-origin',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(data),
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data);
+			})
+			.catch((e) => console.error(e));
+	};
 
 	const navigate = useNavigate();
 
