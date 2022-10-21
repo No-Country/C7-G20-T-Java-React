@@ -40,9 +40,10 @@ const MenuAside = ({ data, title }) => {
 						>
 							<b>{title}</b>
 						</Typography>
-						{data.map((item) => (
-							<Typography key={item} variant='subtitle1'>
-								<b>{item}</b>
+						{data.map((item, index) => (
+							<Typography key={index} variant='subtitle1'>
+								<b>{item.label}</b>&nbsp;
+								{item.value}
 							</Typography>
 						))}
 					</CardContent>
