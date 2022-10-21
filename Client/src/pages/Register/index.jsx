@@ -32,8 +32,12 @@ const Register = () => {
 			body: JSON.stringify(data),
 		})
 			.then((res) => res.json())
-			.then((data) => console.log(data))
-			.catch((e) => console.error(e));
+			.then((data) => {
+				console.log(data);
+				alert('El registro se realizó con éxito!!');
+			})
+			.catch((e) => console.error(e))
+			.finally(navigate('/', { replace: true }));
 	};
 
 	const navigate = useNavigate();
