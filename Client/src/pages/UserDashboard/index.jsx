@@ -6,6 +6,25 @@ import { Box, Typography } from '@mui/material';
 import BoxResult from './components/BoxResult';
 import { Layout } from '../../components';
 
+const patientData = [
+	{
+		label: 'Nombre:',
+		value: 'Esmeralda Vicuña',
+	},
+	{
+		label: 'Edad:',
+		value: '22 años',
+	},
+	{
+		label: 'Fecha de nacimiento:',
+		value: '06/10/2000',
+	},
+	{
+		label: 'Entidad de Salud:',
+		value: 'Swiss Medical',
+	},
+];
+
 const UserDashboard = () => {
 	const mainApp = {
 		backgroundColor: '#dad7dc',
@@ -42,15 +61,7 @@ const UserDashboard = () => {
 					</article>
 				</Box>
 				<section style={asideViewApp}>
-					<MenuAside
-						data={[
-							'Nombre:',
-							'Edad:',
-							'Fecha de nacimiento:',
-							'Entidad de salud:',
-						]}
-						title='Datos personales'
-					/>
+					<MenuAside data={patientData} title='Datos personales' />
 				</section>
 			</main>
 		</Layout>
