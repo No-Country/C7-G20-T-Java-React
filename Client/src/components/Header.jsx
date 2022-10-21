@@ -11,10 +11,13 @@ import {
 	MenuItem,
 } from '@mui/material';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import LogoHeader from '../assets/logoHeader';
 
 const Header = () => {
 	const [anchorElUser, setAnchorElUser] = useState(null);
+
+	const navigate = useNavigate();
 
 	const handleOpenUserMenu = (event) => {
 		setAnchorElUser(event.currentTarget);
@@ -30,6 +33,7 @@ const Header = () => {
 
 	const handleLogout = () => {
 		setAnchorElUser(null);
+		navigate('/', { replace: true });
 	};
 
 	return (

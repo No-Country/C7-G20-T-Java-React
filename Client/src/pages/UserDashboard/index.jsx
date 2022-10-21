@@ -9,7 +9,7 @@ import { Layout } from '../../components';
 const patientData = [
 	{
 		label: 'Nombre:',
-		value: 'Esmeralda Vicuña',
+		value: 'Esmeralda Torres',
 	},
 	{
 		label: 'Edad:',
