@@ -15,6 +15,19 @@ const Login = () => {
 		formState: { errors },
 	} = useForm();
 
+	const navigateByRole = (idRole, idUser) => {
+		switch (idRole) {
+			case 1:
+				return navigate('/admin', { replace: true });
+			case 2:
+				return navigate(`/doctors/${idUser}`, { replace: true });
+			case 3:
+				return navigate(`/patients/${idUser}`, { replace: true });
+			default:
+				return null;
+		}
+	};
+
 	const onSubmit = (data) => {
 		fetch('https://analisis-clinico.herokuapp.com/v1/user/login', {
 			method: 'POST',
@@ -28,6 +41,7 @@ const Login = () => {
 			.then((res) => res.json())
 			.then((data) => {
 				console.log(data);
+				navigateByRole(data.response.role, data.response.idPerson);
 			})
 			.catch((e) => console.error(e));
 	};

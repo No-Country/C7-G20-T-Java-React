@@ -13,7 +13,6 @@ const ActivityList = () => {
 		createData('Jenny Ackerman', 'deleted', null, 'Hace 5 horas'),
 		createData('Jack Murphy', 'created', 'doctor', 'Hace 7 horas'),
 	];
-	console.log({ rows });
 
 	const Items = ({ name, action, role, time }) => {
 		const getAction = () => {
