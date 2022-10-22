@@ -2,6 +2,7 @@ package analisisclinicos.com.analisiclinicos.models.rest.response.service;
 
 import analisisclinicos.com.analisiclinicos.dao.repository.IUserRepository;
 import analisisclinicos.com.analisiclinicos.models.Person;
+import analisisclinicos.com.analisiclinicos.models.rest.request.LoginForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,14 +21,17 @@ public class UserService {
     public String addUser(Person person) {
         StringBuilder response = new StringBuilder();
         Integer completedUserAdd = userConfigRepository.addUser(person);
-        response.append("Success..!")
-                .append(completedUserAdd.toString())
+        response.append("Success..! ")
                 .append(person.getName())
-                .append("was added correctly..!!!");
+                .append(" was added correctly..!!!");
 
         return response.toString();
 
     }
 
 
+    public Person findUser(LoginForm loginForm) {
+        Person user = userConfigRepository.findUser(loginForm);
+        return user;
+    }
 }

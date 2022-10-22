@@ -15,27 +15,27 @@ import javax.validation.constraints.Pattern;
 @Getter
 @Setter
 public class Person implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_person", nullable = false, updatable = false)
     private Long idPerson;
 
     @Column(name = "role_id", nullable = false)
+    @JsonProperty("role")
     private Long roleId;
-
-    @Column(name = "identification_number", nullable = false)
-    private String identificationNumber;
 
     @Column(name = "name")
     @JsonProperty("firstName")
     private  String name;
 
-    @Column(name = "lastName")
+    @Column(name = "last_name")
     @JsonProperty("lastName")
     private String lastName;
 
-    @Column(name = "address")
-    private String address;
+    @Column(name = "age")
+    @JsonProperty("age")
+    private String age;
 
     @Column(name = "email")
     @Email
@@ -45,8 +45,5 @@ public class Person implements Serializable {
     @Column(name = "password")
     @JsonProperty("password")
     private String password;
-
-    @Column(name = "status")
-    private String status;
 
 }
